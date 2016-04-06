@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <h1>{{ username }}</h1>
+    <h1>{{ username }}</h1>
+
+    <h3>Next goal 5000</h3>
+    <div class="bs-component">
+        <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: 45%"></div>
+        </div>
+        <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
+    </div>
+
+    <h3>Badges</h3>
+    <div id="badges">
+    {% for badge in badges %}
+        <div class="badge-frame">
+            <div class="badge-icon {{ badge.badge.code }}"></div>
+            <div class="award">{{ badge.badge.name }}<br>{{ badge.date|date }}</div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

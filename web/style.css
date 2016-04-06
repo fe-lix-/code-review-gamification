@@ -1,0 +1,37 @@
+.badge-icon {
+    width: 128px;
+    height: 128px;
+}
+
+#badges > .badge-frame {
+    width: 200px;
+    height: 200px;
+    float: left;
+}
+
+.badge-icon.cr5 {
+    background-image:url('badges/5-cr.png');
+}
+
+.badge-icon.cr10 {
+    background-image:url('badges/10-cr.png');
+}
+
+.badge-icon.cr50 {
+    background-image:url('badges/50-cr.png');
+}
+
+.badge-icon.cr100 {
+    background-image:url('badges/100-cr.jpg');
+}
+
+.badge-icon.cr500 {
+    background-image:url('badges/500-cr.jpg');
+}
+
+.badge-icon.cr1000 {
+    background-image:url('badges/1000-cr.jpg');
+}
+.badge-icon.cr5000 {
+    background-image:url('badges/5000-cr.png');
+}

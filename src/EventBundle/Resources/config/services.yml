@@ -1,4 +1,19 @@
 services:
-#    event.example:
-#        class: EventBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+
+  event_bundle.doctrine.orm.counter_repository:
+    class: EventBundle\Repository\Counter
+    factory: [ '@doctrine.orm.entity_manager', 'getRepository' ]
+    arguments:
+      - EventBundle\Entity\Counter
+
+  event_bundle.doctrine.orm.repository_event_repository:
+    class: EventBundle\Repository\RepositoryEventRepository
+    factory: [ "@doctrine.orm.entity_manager", 'getRepository' ]
+    arguments:
+      - EventBundle\Entity\RepositoryEvent
+
+  event_bundle.register_event_service:
+    class: EventBundle\Service\RegisterEvent
+    arguments:
+      - "@event_bundle.doctrine.orm.counter_repository"
+      - "@event_bundle.doctrine.orm.repository_event_repository"

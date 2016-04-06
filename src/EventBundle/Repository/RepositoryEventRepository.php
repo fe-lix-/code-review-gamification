@@ -2,6 +2,8 @@
 
 namespace EventBundle\Repository;
 
+use EventBundle\Entity\RepositoryEvent;
+
 /**
  * RepositoryEventRepository
  *
@@ -10,4 +12,30 @@ namespace EventBundle\Repository;
  */
 class RepositoryEventRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param RepositoryEvent $event
+     */
+    public function add(RepositoryEvent $event)
+    {
+        $this->getEntityManager()->persist($event);
+        $this->getEntityManager()->flush($event);
+    }
+
+    /**
+     * @param RepositoryEvent $event
+     * @return bool
+     */
+    public function exists(RepositoryEvent $event)
+    {
+        return $this->findOneBy([
+            'event' => $event->getEvent(),
+            'user' => $event->getUser(),
+            'repositoryReference' => $event->getRepositoryReference(),
+        ]) !== null;
+    }
+
+    public function findByUser($user)
+    {
+        return $this->findBy(['user' => $user]);
+    }
 }

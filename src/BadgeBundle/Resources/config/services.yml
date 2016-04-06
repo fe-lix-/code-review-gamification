@@ -1,0 +1,7 @@
+services:
+
+  badge_bundle.doctrine.orm.badge_awarded_repository:
+    class: BadgeBundle\Repository\BadgeAwardedRepository
+    factory: [ "@doctrine.orm.entity_manager", "getRepository" ]
+    arguments:
+      - BadgeBundle\Entity\BadgeAwarded

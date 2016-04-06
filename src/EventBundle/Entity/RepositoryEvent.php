@@ -49,7 +49,6 @@ class RepositoryEvent
      */
     private $date;
 
-
     /**
      * Get id
      *
