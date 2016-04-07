@@ -8,11 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/users/")
+     * @Route("/code-review/leaderboard")
      */
     public function indexUserAction()
     {
-        $users = $this->container->get('gamification_bundle.doctrine.orm.user_repository')->findAll();
+        $users = $this->container->get('gamification_bundle.doctrine.orm.user_repository')
+            ->getCodeReviewLeaderboard();
 
         return $this->render(
             'GamificationBundle:Default:index.html.twig',

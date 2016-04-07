@@ -37,4 +37,16 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush($user);
     }
+
+    public function getCodeReviewLeaderboard()
+    {
+        $query = $this->createQueryBuilder('user')
+            ->select(['user', 'counter'])
+            ->leftJoin('user.counters', 'counter', 'WITH', 'counter.name = :code_review')
+            ->setParameter('code_review', 'code-review')
+            ->orderBy('counter.count', 'DESC')
+            ->getQuery();
+
+        return $query->execute();
+    }
 }
