@@ -31,7 +31,7 @@ class RegisterEvent
     public function register(RepositoryEvent $event)
     {
         $user = $this->userRepository->obtainUser($event->getUser());
-        var_dump($user);
+
         if ($this->eventRepository->exists($event)) {
             return false;
         }
