@@ -2,6 +2,8 @@
 
 namespace GamificationBundle\Repository;
 
+use GamificationBundle\Entity\User;
+
 /**
  * UserRepository
  *
@@ -10,4 +12,26 @@ namespace GamificationBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param string $name
+     */
+    public function ensureExists($name)
+    {
+        /** @var User $user */
+        $user = $this->findOneBy(['name' => $user]);
+
+        if (!$user) {
+            $user = new User($name);
+            $this->add($user);
+        }
+    }
+
+    /**
+     * @param User $user
+     */
+    public function add(User $user)
+    {
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush($user);
+    }
 }
