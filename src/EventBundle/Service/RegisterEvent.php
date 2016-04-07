@@ -31,6 +31,7 @@ class RegisterEvent
         $this->eventRepository->add($event);
         $counter = $this->counterRepository->getCounter($event);
         $counter->increment();
+        $this->counterRepository->save($counter);
 
         return true;
     }
