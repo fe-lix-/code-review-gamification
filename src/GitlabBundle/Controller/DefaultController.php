@@ -25,13 +25,7 @@ class DefaultController extends Controller
         $mergeRequests = $this->getLatestsMergeRequests();
         $this->registerGitlabMergeRequest($mergeRequests);
 
-        return new Response(
-            sprintf(
-                'OK - Imported : %d Comments, %d Merge Requests',
-                count($comments),
-                count($mergeRequests)
-            )
-        );
+        return $this->redirect('/');
     }
 
     /**
