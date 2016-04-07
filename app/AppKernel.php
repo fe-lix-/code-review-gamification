@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new BadgeBundle\BadgeBundle(),
             new GitlabBundle\GitlabBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new GamificationBundle\GamificationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
