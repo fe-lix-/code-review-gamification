@@ -6,13 +6,15 @@
     <h1>{{ username }}</h1>
     <h1>{{ username }}</h1>
 
-    <h3>Next goal 5000</h3>
+    {% for counter in counters %}
+    <h3>Current goals - {{ counter.name }} 5000</h3>
     <div class="bs-component">
         <div class="progress progress-striped active">
-            <div class="progress-bar" style="width: 45%"></div>
+            <div class="progress-bar" style="width: {{ counter.count / 50 | round  }}%"></div>
         </div>
         <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
     </div>
+    {% endfor %}
 
     <h3>Badges</h3>
     <div id="badges">

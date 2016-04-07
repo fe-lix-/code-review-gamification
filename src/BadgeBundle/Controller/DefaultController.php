@@ -28,11 +28,15 @@ class DefaultController extends Controller
         $awarded[] = new BadgeAwarded(new Badge('cr500', '500 code reviews'));
         $awarded[] = new BadgeAwarded(new Badge('cr1000', '1000 code reviews'));
 
+        $counters = $this->container->get('event_bundle.doctrine.orm.counter_repository')
+            ->getCounterFor($user);
+
         return $this->render(
             'BadgeBundle:Default:index.html.twig',
             [
                 'username' => $user,
-                'badges' => $awarded
+                'badges' => $awarded,
+                'counters' => $counters,
             ]
         );
     }

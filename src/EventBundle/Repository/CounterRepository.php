@@ -24,6 +24,11 @@ class CounterRepository extends \Doctrine\ORM\EntityRepository
         return $counter;
     }
 
+    public function getCounterFor($user)
+    {
+        return $this->findBy(['user' => $user]);
+    }
+
     public function save(Counter $counter)
     {
         $this->getEntityManager()->persist($counter);
