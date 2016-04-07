@@ -23,7 +23,7 @@ class DefaultController extends Controller
         $event->setEvent($data['event']);
         $event->setDate(new \DateTime());
 
-        $this->container->get('event_bundle.register_event_service')->register($event);
+        $this->container->get('gamification_bundle.register_event_service')->register($event);
 
         return new Response('OK');
     }

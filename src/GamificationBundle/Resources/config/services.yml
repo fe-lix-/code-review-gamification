@@ -1,4 +1,15 @@
 services:
-#    gamification.example:
-#        class: GamificationBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+
+  gamification_bundle.doctrine.orm.user_repository:
+      class: GamificationBundle\Repository\UserRepository
+      factory: [ '@doctrine.orm.entity_manager', 'getRepository' ]
+      arguments:
+        - GamificationBundle\Entity\User
+
+  gamification_bundle.register_event_service:
+    class: GamificationBundle\Service\RegisterEvent
+    arguments:
+      - "@event_bundle.doctrine.orm.counter_repository"
+      - "@event_bundle.doctrine.orm.repository_event_repository"
+      - "@gamification_bundle.doctrine.orm.user_repository"
+

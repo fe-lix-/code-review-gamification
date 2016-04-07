@@ -14,16 +14,19 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
      * @param string $name
+     * @return User
      */
-    public function ensureExists($name)
+    public function obtainUser($name)
     {
         /** @var User $user */
-        $user = $this->findOneBy(['name' => $user]);
+        $user = $this->findOneBy(['name' => $name]);
 
         if (!$user) {
             $user = new User($name);
             $this->add($user);
         }
+
+        return $user;
     }
 
     /**

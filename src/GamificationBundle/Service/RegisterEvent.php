@@ -1,10 +1,11 @@
 <?php
 
-namespace EventBundle\Service;
+namespace GamificationBundle\Service;
 
 use EventBundle\Entity\RepositoryEvent;
 use EventBundle\Repository\CounterRepository;
 use EventBundle\Repository\RepositoryEventRepository;
+use GamificationBundle\Repository\UserRepository;
 
 class RegisterEvent
 {
@@ -14,16 +15,23 @@ class RegisterEvent
     /** @var RepositoryEventRepository */
     private $eventRepository;
 
+    /** @var UserRepository */
+    private $userRepository;
+
     public function __construct(
         CounterRepository $counterRepository,
-        RepositoryEventRepository $eventRepository
+        RepositoryEventRepository $eventRepository,
+        UserRepository $userRepository
     ) {
         $this->counterRepository = $counterRepository;
         $this->eventRepository = $eventRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function register(RepositoryEvent $event)
     {
+        $user = $this->userRepository->obtainUser($event->getUser());
+        var_dump($user);
         if ($this->eventRepository->exists($event)) {
             return false;
         }
