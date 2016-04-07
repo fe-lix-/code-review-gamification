@@ -10,11 +10,11 @@ parameters:
     # You should uncomment this if you want use pdo_sqlite
     database_path: "%kernel.root_dir%/data.db3"
 
-    gitlab_database_host: 127.0.0.1
-    gitlab_database_port: null
+    gitlab_database_host: 127.0.0.01
+    gitlab_database_port: ~
     gitlab_database_name: symfony
     gitlab_database_user: root
-    gitlab_database_password: null
+    gitlab_database_password: ~
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
