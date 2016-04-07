@@ -29,6 +29,13 @@ class User
     private $name;
 
     /**
+     * @var Counter
+     *
+     * @ORM\OneToMany(targetEntity="Counter", mappedBy="user")
+     */
+    private $counters;
+
+    /**
      * @param string $name
      */
     public function __construct($name)
@@ -54,6 +61,29 @@ class User
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Counter
+     */
+    public function getCounters()
+    {
+        return $this->counters;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodeReviews()
+    {
+        /** @var Counter $counter */
+        foreach ($this->counters as $counter) {
+            if ($counter->getName() === 'code-review') {
+                return $counter->getCount();
+            }
+        }
+
+        return 0;
     }
 }
 

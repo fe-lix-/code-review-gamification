@@ -3,7 +3,7 @@
 namespace GamificationBundle\Service;
 
 use EventBundle\Entity\RepositoryEvent;
-use EventBundle\Repository\CounterRepository;
+use GamificationBundle\Repository\CounterRepository;
 use EventBundle\Repository\RepositoryEventRepository;
 use GamificationBundle\Repository\UserRepository;
 
@@ -37,7 +37,7 @@ class RegisterEvent
         }
 
         $this->eventRepository->add($event);
-        $counter = $this->counterRepository->getCounter($event);
+        $counter = $this->counterRepository->getCounter($event, $user);
         $counter->increment();
         $this->counterRepository->save($counter);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace EventBundle\Entity;
+namespace GamificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Counter
  *
  * @ORM\Table(name="counter")
- * @ORM\Entity(repositoryClass="EventBundle\Repository\CounterRepository")
+ * @ORM\Entity(repositoryClass="GamificationBundle\Repository\CounterRepository")
  */
 class Counter
 {
@@ -29,9 +29,9 @@ class Counter
     private $name;
 
     /**
-     * @var string
+     * @var User
      *
-     * @ORM\Column(name="user", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="counters")
      */
     private $user;
 
@@ -44,9 +44,9 @@ class Counter
 
     /**
      * @param string $name
-     * @param string $user
+     * @param User $user
      */
-    public function __construct($name, $user)
+    public function __construct($name, User $user)
     {
         $this->name = $name;
         $this->user = $user;
@@ -85,7 +85,7 @@ class Counter
     }
 
     /**
-     * @return string
+     * @return User
      */
     public function getUser()
     {

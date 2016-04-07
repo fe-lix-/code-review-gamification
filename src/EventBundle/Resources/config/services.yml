@@ -1,11 +1,5 @@
 services:
 
-  event_bundle.doctrine.orm.counter_repository:
-    class: EventBundle\Repository\Counter
-    factory: [ '@doctrine.orm.entity_manager', 'getRepository' ]
-    arguments:
-      - EventBundle\Entity\Counter
-
   event_bundle.doctrine.orm.repository_event_repository:
     class: EventBundle\Repository\RepositoryEventRepository
     factory: [ "@doctrine.orm.entity_manager", 'getRepository' ]

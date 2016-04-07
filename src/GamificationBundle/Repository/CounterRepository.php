@@ -1,9 +1,10 @@
 <?php
 
-namespace EventBundle\Repository;
+namespace GamificationBundle\Repository;
 
-use EventBundle\Entity\Counter;
+use GamificationBundle\Entity\Counter;
 use EventBundle\Entity\RepositoryEvent;
+use GamificationBundle\Entity\User;
 
 /**
  * CounterRepository
@@ -13,22 +14,29 @@ use EventBundle\Entity\RepositoryEvent;
  */
 class CounterRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getCounter(RepositoryEvent $event)
+    public function getCounter(RepositoryEvent $event, User $user)
     {
-        $counter = $this->findOneBy(['name' => $event->getEvent(), 'user' => $event->getUser()]);
+        $counter = $this->findOneBy(['name' => $event->getEvent(), 'user' => $user]);
 
         if (!$counter) {
-            $counter = new Counter($event->getEvent(), $event->getUser());
+            $counter = new Counter($event->getEvent(), $user);
         }
 
         return $counter;
     }
 
-    public function getCounterFor($user)
+    /**
+     * @param User $user
+     * @return Counter[]
+     */
+    public function getCounterFor(User $user)
     {
         return $this->findBy(['user' => $user]);
     }
 
+    /**
+     * @param Counter $counter
+     */
     public function save(Counter $counter)
     {
         $this->getEntityManager()->persist($counter);

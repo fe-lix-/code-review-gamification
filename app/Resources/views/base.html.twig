@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-theme/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-theme/custom.min.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="{{ asset('style.css') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -18,6 +19,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/users/">Users</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
