@@ -17,7 +17,7 @@
                     <tbody>
                         {% for user in users %}
                         <tr>
-                            <th>{{ user.name }}</th>
+                            <th><a href="/badges/{{ user.name }}">{{ user.name }}</a></th>
                             <th>{{ user.codeReviews }}</th>
                         </tr>
                         {% endfor %}
