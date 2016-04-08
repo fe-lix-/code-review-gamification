@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="col-lg-10 col-offset-5q">
+        <div class="ct-chart ct-perfect-fourth"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
     <script src="{{ asset('assets/vendor/chartist/dist/chartist.min.js') }}"></script>
-    <div class="ct-chart ct-perfect-fourth"></div>
     <script>
         var data = {
-            // A labels array that can contain any sort of values
             labels: {{ label|json_encode|raw }},
-            // Our series array that contains series objects or in this case series data arrays
             series: {{ values|json_encode|raw }}
         };
 
-        new Chartist.Line('.ct-chart', data);
+        var options = {
+            width: 800,
+            height: 400
+        };
+
+        new Chartist.Line('.ct-chart', data, options);
     </script>
 {% endblock %}
 
