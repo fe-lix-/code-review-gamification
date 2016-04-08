@@ -2,6 +2,27 @@
 
 {% block body %}
     <div class="col-lg-10 col-offset-5q">
+        <div class="well bs-component">
+            <form class="form-horizontal" id="compare">
+                <div class="form-group">
+                    <label for="user1" class="col-lg-2 control-label">User 1</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="user1" placeholder="User 1" value="ipaz">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="user2" class="col-lg-2 control-label">User 2</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="user2" placeholder="User 2" value="fdelval">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary pull-right">Compare</button>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="ct-chart ct-perfect-fourth"></div>
     </div>
 {% endblock %}
@@ -20,6 +41,15 @@
         };
 
         new Chartist.Line('.ct-chart', data, options);
+
+        $(document).ready(function() {
+            $("form#compare").submit(function(event) {
+                event.preventDefault();
+                var user1 = $('input#user1').val();
+                var user2 = $('input#user2').val();
+                window.location.replace("/code-review/compare/" + user1 + "/" + user2);
+            });
+        });
     </script>
 {% endblock %}
 

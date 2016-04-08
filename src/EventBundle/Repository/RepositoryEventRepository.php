@@ -72,7 +72,7 @@ class RepositoryEventRepository extends \Doctrine\ORM\EntityRepository
                 where event = :code_review
                 and user = :user
                 group by strftime('%Y-%W', date) order by date ASC
-                limit 50";
+                limit 10";
 
         $statement = $this->getEntityManager()->getConnection()->prepare($sql);
         $statement->bindValue('code_review', 'code-reviewed');
