@@ -29,6 +29,7 @@
 
 {% block javascripts %}
     <script src="{{ asset('assets/vendor/chartist/dist/chartist.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/chartist-plugin-legend/chartist-plugin-legend.js') }}"></script>
     <script>
         var data = {
             labels: {{ label|json_encode|raw }},
@@ -37,7 +38,8 @@
 
         var options = {
             width: 800,
-            height: 400
+            height: 400,
+            plugins:[ Chartist.plugins.legend()]
         };
 
         new Chartist.Line('.ct-chart', data, options);

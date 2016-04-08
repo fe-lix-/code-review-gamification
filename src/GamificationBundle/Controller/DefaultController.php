@@ -36,7 +36,13 @@ class DefaultController extends Controller
             'GamificationBundle:Default:code-review-history.html.twig',
             [
                 'label' => array_column($codeReviewHistory, 'week'),
-                'values' => [array_column($codeReviewHistory, 'count')],
+                'values' => [
+                    [
+                        'name' => 'Code reviews',
+                        'class' => 'codereview',
+                        'data' => array_column($codeReviewHistory, 'count')
+                    ]
+                ],
             ]
         );
     }
@@ -60,8 +66,8 @@ class DefaultController extends Controller
             [
                 'label' => $labelUser1,
                 'values' => [
-                    ['name' => $user1, 'data' => $countUser1],
-                    ['name' => $user2, 'data' => $countUser2],
+                    ['name' => $user1, 'class' => 'user1', 'data' => $countUser1],
+                    ['name' => $user2, 'class' => 'user2', 'data' => $countUser2],
                 ],
             ]
         );
