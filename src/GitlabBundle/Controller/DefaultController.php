@@ -77,7 +77,7 @@ class DefaultController extends Controller
                 )
             );
 
-            $this->container->get('event_bundle.register_event_service')->register($event);
+            $this->container->get('gamification_bundle.register_event_service')->register($event);
         }
 
         if ($comments) {
@@ -107,7 +107,7 @@ class DefaultController extends Controller
                 )
             );
 
-            $this->container->get('event_bundle.register_event_service')->register($event);
+            $this->container->get('gamification_bundle.register_event_service')->register($event);
         }
 
         if ($comments) {

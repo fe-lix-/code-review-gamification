@@ -78,7 +78,7 @@ class User
     {
         /** @var Counter $counter */
         foreach ($this->counters as $counter) {
-            if ($counter->getName() === 'code-review') {
+            if ($counter->getName() === 'code-reviewed') {
                 return $counter->getCount();
             }
         }
