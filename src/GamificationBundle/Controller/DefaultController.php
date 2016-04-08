@@ -32,12 +32,11 @@ class DefaultController extends Controller
         $codeReviewHistory = $this->container->get('event_bundle.doctrine.orm.repository_event_repository')
             ->getCodeReviewHistory();
 
-        var_dump($codeReviewHistory);
-
         return $this->render(
             'GamificationBundle:Default:code-review-history.html.twig',
             [
-                'history' => $codeReviewHistory,
+                'label' => array_column($codeReviewHistory, 'week'),
+                'values' => array_column($codeReviewHistory, 'count'),
             ]
         );
     }

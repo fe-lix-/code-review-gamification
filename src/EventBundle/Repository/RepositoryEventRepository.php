@@ -45,16 +45,19 @@ class RepositoryEventRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getCodeReviewHistory()
     {
-        $sql = "select strftime('%Y-%W', date), count(*)
+        $sql = "select strftime('%Y-%m', date) as week, count(*) as count
                 from repository_event
                 where event = :code_review
-                group by strftime('%W', date) order by date ASC
+                group by strftime('%Y-%m', date) order by date ASC
                 limit 30";
 
         $statement = $this->getEntityManager()->getConnection()->prepare($sql);
         $statement->bindValue('code_review', 'code-reviewed');
         $statement->execute();
 
-        return $statement->fetchAll();
+        $result = $statement->fetchAll();
+        array_pop($result);
+        
+        return $result;
     }
 }

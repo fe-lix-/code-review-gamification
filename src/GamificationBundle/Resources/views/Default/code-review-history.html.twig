@@ -1,5 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ dump(history) }}
+    <script src="{{ asset('assets/vendor/chartist/dist/chartist.min.js') }}"></script>
+    <div class="ct-chart ct-perfect-fourth"></div>
+    <script>
+        var data = {
+            // A labels array that can contain any sort of values
+            labels: {{ label|json_encode|raw }},
+            // Our series array that contains series objects or in this case series data arrays
+            series: [
+                {{ values|json_encode|raw }}
+            ]
+        };
+
+        new Chartist.Line('.ct-chart', data);
+    </script>
 {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/chartist/dist/chartist.min.css') }}">
+{% endblock %}
+
+{#{% block javascripts %}#}
+    {#<script src="{{ asset('assets/vendor/chartist/dist/chartist.min.js') }}"></script>#}
+{#{% endblock %}#}
