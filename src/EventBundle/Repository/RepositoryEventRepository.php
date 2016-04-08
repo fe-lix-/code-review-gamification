@@ -38,4 +38,23 @@ class RepositoryEventRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->findBy(['user' => $user]);
     }
+
+    /**
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getCodeReviewHistory()
+    {
+        $sql = "select strftime('%Y-%W', date), count(*)
+                from repository_event
+                where event = :code_review
+                group by strftime('%W', date) order by date ASC
+                limit 30";
+
+        $statement = $this->getEntityManager()->getConnection()->prepare($sql);
+        $statement->bindValue('code_review', 'code-reviewed');
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }
