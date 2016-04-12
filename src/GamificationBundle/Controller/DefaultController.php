@@ -48,6 +48,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/code-review/leaderboard/current")
+     */
+    public function monthlyReportAction()
+    {
+        $monthlyReport = $this->container->get('event_bundle.doctrine.orm.repository_event_repository')
+            ->getCodeReviewMonthlyReport();
+
+        return $this->render(
+            'GamificationBundle:Default:monthly-report.html.twig',
+            [
+                'report' => $monthlyReport,
+            ]
+        );
+    }
+
+    /**
      * @Route("/code-review/compare/{user1}/{user2}")
      */
     public function codeReviewHistoryCompareUsers($user1, $user2)

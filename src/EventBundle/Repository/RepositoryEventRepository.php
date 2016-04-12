@@ -3,6 +3,7 @@
 namespace EventBundle\Repository;
 
 use EventBundle\Entity\RepositoryEvent;
+use DateTime;
 
 /**
  * RepositoryEventRepository
@@ -89,5 +90,31 @@ class RepositoryEventRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $result;
+    }
+
+    /**
+     * @param DateTime $month
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getCodeReviewMonthlyReport(DateTime $month = null)
+    {
+        if (!$month) {
+            $month = new DateTime();
+        }
+
+        $sql = "select user, count(*) as count
+                from repository_event
+                where event = :code_review
+                and strftime('%Y%m', date) = :current_month
+                group by user
+                order by count(*) DESC";
+
+        $statement = $this->getEntityManager()->getConnection()->prepare($sql);
+        $statement->bindValue('code_review', 'code-reviewed');
+        $statement->bindValue('current_month', $month->format('Ym'));
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
 }
