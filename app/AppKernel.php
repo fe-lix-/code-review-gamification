@@ -17,7 +17,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new EventBundle\EventBundle(),
-            new BadgeBundle\BadgeBundle(),
             new GitlabBundle\GitlabBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new GamificationBundle\GamificationBundle(),

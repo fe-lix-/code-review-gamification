@@ -8,11 +8,6 @@ gitlab:
     type:     annotation
     prefix:   /
 
-badge:
-    resource: "@BadgeBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 event:
     resource: "@EventBundle/Controller/"
     type:     annotation
