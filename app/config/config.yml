@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@EventBundle/Resources/config/services.yml" }
-    - { resource: "@BadgeBundle/Resources/config/services.yml" }
     - { resource: "@GitlabBundle/Resources/config/services.yml" }
     - { resource: "@GamificationBundle/Resources/config/services.yml" }
 
