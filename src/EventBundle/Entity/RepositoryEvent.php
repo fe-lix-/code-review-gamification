@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RepositoryEvent
 {
+    const COMMENT_EVENT = 'comment';
+    const MERGE_REQUEST_EVENT = 'merge-request';
+    const CODE_REVIEW_EVENT = 'code-review';
+
     /**
      * @var int
      *
@@ -153,6 +157,14 @@ class RepositoryEvent
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isComment()
+    {
+        return $this->event === self::COMMENT_EVENT;
     }
 }
 

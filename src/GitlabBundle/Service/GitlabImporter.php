@@ -52,7 +52,7 @@ class GitlabImporter
         $comments = $this->gitlabRepository->getLatestsCommentsAfterId($lastImportedId);
 
         foreach ($comments as $gitlabComments) {
-            $event = $this->createEventFromGitlabData('code-review', $gitlabComments);
+            $event = $this->createEventFromGitlabData(RepositoryEvent::COMMENT_EVENT, $gitlabComments);
 
             $this->registerEvent->register($event);
         }
@@ -69,7 +69,7 @@ class GitlabImporter
         $mergeRequests = $this->gitlabRepository->getLatestsMergeRequests($lastImportedId);
 
         foreach ($mergeRequests as $mergeRequest) {
-            $event = $this->createEventFromGitlabData('merge-request', $mergeRequest);
+            $event = $this->createEventFromGitlabData(RepositoryEvent::MERGE_REQUEST_EVENT, $mergeRequest);
 
             $this->registerEvent->register($event);
         }

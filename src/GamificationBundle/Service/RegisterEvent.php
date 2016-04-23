@@ -32,8 +32,12 @@ class RegisterEvent
     {
         $user = $this->userRepository->obtainUser($event->getUser());
 
-        if ($this->eventRepository->exists($event)) {
-            return false;
+        if ($event->isComment()) {
+            $this->createCodeReviewFromComment($event);
+        } else {
+            if ($this->eventRepository->exists($event)) {
+                return false;
+            }
         }
 
         $this->eventRepository->add($event);
@@ -42,5 +46,19 @@ class RegisterEvent
         $this->counterRepository->save($counter);
 
         return true;
+    }
+
+    /**
+     * @param RepositoryEvent $event
+     */
+    private function createCodeReviewFromComment(RepositoryEvent $event)
+    {
+        $triggeredEvent = new RepositoryEvent();
+        $triggeredEvent->setRepositoryReference($event->getRepositoryReference());
+        $triggeredEvent->setDate($event->getDate());
+        $triggeredEvent->setEvent(RepositoryEvent::MERGE_REQUEST_EVENT);
+        $triggeredEvent->setUser($event->getUser());
+
+        $this->register($triggeredEvent);
     }
 }
