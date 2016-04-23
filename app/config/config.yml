@@ -55,13 +55,14 @@ doctrine:
                 charset:  UTF8
                 path:     "%database_path%"
             gitlab:
-                driver:   pdo_mysql
+                driver:   pdo_sqlite
                 host:     "%gitlab_database_host%"
                 port:     "%gitlab_database_port%"
                 dbname:   "%gitlab_database_name%"
                 user:     "%gitlab_database_user%"
                 password: "%gitlab_database_password%"
                 charset:  UTF8
+                path:     "%gitlab_database_path%"
 
 
     orm:

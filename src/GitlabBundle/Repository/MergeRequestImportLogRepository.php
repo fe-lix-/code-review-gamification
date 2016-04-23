@@ -12,6 +12,9 @@ use GitlabBundle\Entity\MergeRequestImportLog;
  */
 class MergeRequestImportLogRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return int
+     */
     public function findLastImportedId()
     {
         /** @var MergeRequestImportLog $lastImport */
@@ -22,5 +25,16 @@ class MergeRequestImportLogRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return 0;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setLastImportedId($id)
+    {
+        $importLog = new MergeRequestImportLog((int) $id);
+
+        $this->getEntityManager()->persist($importLog);
+        $this->getEntityManager()->flush($importLog);
     }
 }
