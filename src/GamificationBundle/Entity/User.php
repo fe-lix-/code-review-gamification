@@ -3,6 +3,7 @@
 namespace GamificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EventBundle\Entity\RepositoryEvent;
 
 /**
  * User
@@ -79,6 +80,30 @@ class User
         /** @var Counter $counter */
         foreach ($this->counters as $counter) {
             if ($counter->getName() === 'code-reviewed') {
+                return $counter->getCount();
+            }
+        }
+
+        return 0;
+    }
+
+    public function getMergeRequests()
+    {
+        /** @var Counter $counter */
+        foreach ($this->counters as $counter) {
+            if ($counter->getName() === RepositoryEvent::MERGE_REQUEST_EVENT) {
+                return $counter->getCount();
+            }
+        }
+
+        return 0;
+    }
+
+    public function getComments()
+    {
+        /** @var Counter $counter */
+        foreach ($this->counters as $counter) {
+            if ($counter->getName() === RepositoryEvent::COMMENT_EVENT) {
                 return $counter->getCount();
             }
         }

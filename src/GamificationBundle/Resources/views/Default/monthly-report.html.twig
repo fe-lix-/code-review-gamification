@@ -13,6 +13,8 @@
                         <th>Position</th>
                         <th>Username</th>
                         <th>Code review</th>
+                        <th>Merge request</th>
+                        <th>Comments</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -21,6 +23,8 @@
                             <th>#{{ loop.index }}</th>
                             <th><a href="/badges/{{ entry.user }}">{{ entry.user}}</a></th>
                             <th>{{ entry.count }}</th>
+                            <th>{{ entry.count_mr }}</th>
+                            <th>{{ entry.count_com }}</th>
                         </tr>
                     {% endfor %}
                     </tbody>

@@ -55,20 +55,19 @@ doctrine:
                 charset:  UTF8
                 path:     "%database_path%"
             gitlab:
-                driver:   pdo_sqlite
+                driver:   pdo_mysql
                 host:     "%gitlab_database_host%"
                 port:     "%gitlab_database_port%"
                 dbname:   "%gitlab_database_name%"
                 user:     "%gitlab_database_user%"
                 password: "%gitlab_database_password%"
                 charset:  UTF8
-                path:     "%gitlab_database_path%"
+                #path:     "%gitlab_database_path%"
 
 
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        auto_generate_proxy_classes: "%kernel.debug%"
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -3,15 +3,15 @@ services:
   gitlab_bundle.gitlab_repository:
     class: GitlabBundle\Repository\GitlabRepository
     arguments:
-      - @doctrine.orm.gitlab_entity_manager
+      - "@doctrine.dbal.gitlab_connection"
 
-  gitlab_bundle.comment_import_log_repository
+  gitlab_bundle.comment_import_log_repository:
     class: GitlabBundle\Repository\CommentImportLogRepository
     factory: [ '@doctrine.orm.entity_manager', 'getRepository' ]
     arguments:
       - GitlabBundle\Entity\CommentImportLog
 
-  gitlab_bundle.merge_request_import_log_repository
+  gitlab_bundle.merge_request_import_log_repository:
     class: GitlabBundle\Repository\CommentImportLogRepository
     factory: [ '@doctrine.orm.entity_manager', 'getRepository' ]
     arguments:
@@ -20,7 +20,7 @@ services:
   gitlab_bundle.importer:
     class: GitlabBundle\Service\GitlabImporter
     arguments:
-      - @gitlab_bundle.gitlab_repository
-      - @gitlab_bundle.comment_import_log_repository
-      - @gitalb_bundle.merge_request_import_log_repository
-      - gamification_bundle.register_event_service
+      - "@gitlab_bundle.gitlab_repository"
+      - "@gitlab_bundle.comment_import_log_repository"
+      - "@gitlab_bundle.merge_request_import_log_repository"
+      - "@gamification_bundle.register_event_service"

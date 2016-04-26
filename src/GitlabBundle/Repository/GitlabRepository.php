@@ -2,22 +2,22 @@
 
 namespace GitlabBundle\Repository;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Connection;
 
 class GitlabRepository
 {
     const MYSQL_DATE_FORMAT = 'Y-m-d H:i:s';
     const BATCH_SIZE = 2000;
-    
-    /** @var  EntityManager */
-    private $entityManager;
+
+    /** @var Connection */
+    private $connection;
 
     /**
-     * @param EntityManager $entityManager
+     * @param Connection $connection
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(Connection $connection)
     {
-        $this->entityManager = $entityManager;
+        $this->connection = $connection;
     }
 
     /**
@@ -38,14 +38,13 @@ class GitlabRepository
                 order by notes.id ASC
                 limit " . self::BATCH_SIZE;
 
-        $statement = $this->entityManager->getConnection()->prepare($sql);
+        $statement = $this->connection->prepare($sql);
         $statement->bindValue('jenkins_user_id', 42);
         $statement->bindValue('merge_request', 'MergeRequest');
         $statement->bindValue('last_imported_id', $lastId);
 
         $statement->execute();
-        $events = $statement->fetchAll();
-        return $events;
+        return $statement->fetchAll();
     }
 
     /**
@@ -62,7 +61,7 @@ class GitlabRepository
                 order by merge_requests.id ASC
                 limit " . self::BATCH_SIZE;
 
-        $statement = $this->entityManager->getConnection()->prepare($sql);
+        $statement = $this->connection->prepare($sql);
         $statement->bindValue('last_imported_id', $lastImportedId);
 
         $statement->execute();

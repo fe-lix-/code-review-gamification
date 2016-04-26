@@ -42,8 +42,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     {
         $query = $this->createQueryBuilder('user')
             ->select(['user', 'counter'])
-            ->leftJoin('user.counters', 'counter', 'WITH', 'counter.name = :code_review')
-            ->setParameter('code_review', 'code-reviewed')
+            ->leftJoin('user.counters', 'counter')
             ->orderBy('counter.count', 'DESC')
             ->getQuery();
 

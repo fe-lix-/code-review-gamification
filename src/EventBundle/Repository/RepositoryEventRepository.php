@@ -103,15 +103,19 @@ class RepositoryEventRepository extends \Doctrine\ORM\EntityRepository
             $month = new DateTime();
         }
 
-        $sql = "select user, count(*) as count
+        $sql = "select user,
+                    SUM(CASE WHEN event = :code_review THEN 1 ELSE 0 END) as count,
+                    SUM(CASE WHEN event = :merge_request THEN 1 ELSE 0 END) as count_mr,
+                    SUM(CASE WHEN event = :comments THEN 1 ELSE 0 END) as count_com
                 from repository_event
-                where event = :code_review
-                and strftime('%Y%m', date) = :current_month
+                where strftime('%Y%m', date) = :current_month
                 group by user
-                order by count(*) DESC";
+                order by SUM(CASE WHEN event = :code_review THEN 1 ELSE 0 END) DESC";
 
         $statement = $this->getEntityManager()->getConnection()->prepare($sql);
         $statement->bindValue('code_review', 'code-reviewed');
+        $statement->bindValue('merge_request', RepositoryEvent::MERGE_REQUEST_EVENT);
+        $statement->bindValue('comments', RepositoryEvent::COMMENT_EVENT);
         $statement->bindValue('current_month', $month->format('Ym'));
         $statement->execute();
 
